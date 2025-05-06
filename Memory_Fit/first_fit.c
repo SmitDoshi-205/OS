@@ -1,7 +1,7 @@
 #include <stdio.h>
 int process[20]; // size of processes
 int memory[20];  // size of available memory blocks
-int result[20][2]; // resultant matrix
+int result[20][3]; // resultant matrix
 
 void main() {
     int n, m, i, j; // n = no. of processes, m = no. of memory blocks
@@ -31,6 +31,7 @@ void main() {
             if(process[i] <= memory[j]) {
                 result[i][0] = process[i];
                 result[i][1] = memory[j];
+                result[i][2] = memory[j] - process[i];
                 memory[j] = 0;
                 allocated = 1;
                 break;
@@ -42,10 +43,10 @@ void main() {
         }
     }
 
-    printf("Process \t Memory Block\n");
+    printf("Process \t Memory Block \t Holes\n");
     for(i = 0; i < n; i++) {
         if(result[i][1] != -1)
-            printf("%d \t\t %d\n", result[i][0], result[i][1]);
+            printf("%d \t\t %d \t\t %d\n", result[i][0], result[i][1], result[i][2]);
         else
             printf("%d \t\t Not Allocated\n", result[i][0]);
     }

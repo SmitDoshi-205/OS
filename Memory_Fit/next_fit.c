@@ -2,7 +2,7 @@
 
 int process[20]; // sizes of processes
 int memory[20];  // sizes of memory blocks
-int result[20][2]; // result matrix
+int result[20][3]; // result matrix
 
 void main() {
     int n, m, i, j, lastPos = 0;
@@ -32,6 +32,7 @@ void main() {
             if(memory[j] >= process[i]) {
                 result[i][0] = process[i];
                 result[i][1] = memory[j];
+                result[i][2] = memory[j] - process[i];
                 memory[j] = 0; // mark block as used
                 lastPos = (j + 1) % m;
                 allocated = 1;
@@ -50,7 +51,7 @@ void main() {
     printf("Process \t Memory Block\n");
     for(i = 0; i < n; i++) {
         if(result[i][1] != -1)
-            printf("%d \t\t %d\n", result[i][0], result[i][1]);
+            printf("%d \t\t %d \t\t\n", result[i][0], result[i][1], result[i][2]);
         else
             printf("%d \t\t Not Allocated\n", result[i][0]);
     }
